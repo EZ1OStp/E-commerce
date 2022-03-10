@@ -12,9 +12,17 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('js/tableuser.js') }}"></script>
+
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -30,6 +38,42 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+
+
+
+                {{-- messages de la session --}}
+                @if(session()->has('info'))
+                <div class="alert alert-info w-50 mx-auto h-15">
+                    <button type="button" class="close" onclick="$(this).parent().hide(500)">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    {{ session()->get('info') }}
+                </div>
+            @endif
+
+
+
+            @if(session()->has('success'))
+                <div class="alert alert-success w-50 mx-auto h-15">
+                    <button type="button" class="close" onclick="$(this).parent().hide(500)">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+
+
+
+
+            @if(session()->has('danger'))
+            <div class="alert alert-danger w-50 mx-auto h-15">
+                <button type="button" class="close" onclick="$(this).parent().hide(500)">
+                    <span aria-hidden="true">×</span>
+                </button>
+                {{ session()->get('danger') }}
+            </div>
+            @endif
+
             </main>
         </div>
     </body>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+// use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -26,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -37,7 +40,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'firstname' => ['required','min:3'],
+            'lastname' => ['required','min:3'],
+            'email' => ['required'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+        ]);
+
+
+        $data['firstname'] = $request->firstname;
+        $data['lastname'] = $request->lastname;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+
+        // dd($data);
+
+        $user = User::create($data);
+
+
+        session()->flash('success', 'Enregistrement effectuer');
+
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -46,9 +69,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -57,11 +81,12 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
-    }
+        $user = User::find($id);
 
+        return view('admin.users.update', compact('user'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -69,9 +94,27 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'firstname' => ['required','min:3'],
+            'lastname' => ['required','min:3'],
+            'email' => ['required'],
+        ]);
+
+
+        $data['firstname'] = $request->firstname;
+        $data['lastname'] = $request->lastname;
+        $data['email'] = $request->email;
+
+
+        // dd($data);
+
+        $user = User::find($id);
+        $user->update($data);
+
+
+        return redirect()->route('dashboard')->with('info', 'Modification a été réalise avec succès');
     }
 
     /**
@@ -80,8 +123,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        // dd($user);
+        $user->delete();
+        return redirect()->route('dashboard')->with('success', 'Suppression efféctuer'. ' '. $user->firstname . ' '. $user->lastname);
     }
 }
