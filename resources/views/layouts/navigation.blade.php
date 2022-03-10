@@ -31,8 +31,8 @@
                 @if(Auth::user()->is_admin)
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('produit.index')" :active="request()->routeIs('user.index')">
-                        {{ __('Users') }}
+                    <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit.index')">
+                        {{ __('Produits') }}
                     </x-nav-link>
                 </div>
 

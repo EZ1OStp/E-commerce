@@ -29,8 +29,8 @@
                     <tr>
                         <th>#</th>
                         <th>Photo</th>
-                        <th>Nom</th>
-                        <th>Email</th>
+                        <th>Titre</th>
+                        <th>Quantité</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -65,7 +65,7 @@
                 </tbody>
             </table>
 
-                {{ $produits->links() }}
+                {{-- {{ $produits->links() }} --}}
 
 
     </div>

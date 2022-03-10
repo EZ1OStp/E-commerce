@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProduitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('user', UserController::class);
-Route::resource('produit', UserController::class);
+Route::resource('produit', ProduitController::class);
 
 require __DIR__.'/auth.php';

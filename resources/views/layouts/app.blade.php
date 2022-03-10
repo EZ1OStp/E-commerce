@@ -39,7 +39,7 @@
             <main>
                 {{ $slot }}
 
-
+                @yield('content')
 
                 {{-- messages de la session --}}
                 @if(session()->has('info'))

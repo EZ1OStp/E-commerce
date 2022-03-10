@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->double('price');
-            $table->integer('quatity');
+            $table->integer('quantite')->random_int(0, 20);
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +31,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produits');
+        Schema::table('produits', function (Blueprint $table) {
+            //
+        });
     }
 };
