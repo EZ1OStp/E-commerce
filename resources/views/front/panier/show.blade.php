@@ -32,7 +32,7 @@
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>
-							<strong><a href="{{ route('product.show', $key) }}" title="Afficher le produit" >{{ $item['name'] }}</a></strong>
+							<strong><a href="{{ route('produit.show', $key) }}" title="Afficher le produit" >{{ $item['title'] }}</a></strong>
 						</td>
 						<td>{{ $item['price'] }} $</td>
 						<td>
@@ -67,6 +67,7 @@
 
 	<!-- Lien pour vider le panier -->
 	<a class="btn btn-danger" href="{{ route('panier.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
+	<a class="btn btn-secondary" href="{{ route('public.produits.index') }}" title="Retour aux produits" >Voir les produits</a>
 
 	@else
 	<div class="alert alert-info">Aucun produit au panier</div>

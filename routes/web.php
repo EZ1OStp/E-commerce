@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\PanierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +47,18 @@ Route::group(['middleware' => ['auth','front']],function() {
 });
 
 
+// Route::get('/public', function() {
+//     return view('front/public');
+//  })->name('public.index');
+
 Route::get('/public/produits', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits.index');
 Route::get('/public/produits/{produit}', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits.show');
 
 // Les routes de gestion du panier
-Route::get('panier', "PanierController@show")->name('panier.show');
-Route::post('panier/add/{produit}', "PanierController@add")->name('panier.add');
-Route::get('panier/remove/{produit}', "PanierController@remove")->name('panier.remove');
-Route::get('panier/empty', "PanierController@empty")->name('panier.empty');
+Route::get('panier', [App\Http\Controllers\PanierController::class, 'show'])->name('panier.show');
+Route::post('panier/add/{produit}', [App\Http\Controllers\PanierController::class, 'add'])->name('panier.add');
+Route::get('panier/remove/{produit}', [App\Http\Controllers\PanierController::class, 'remove'])->name('panier.remove');
+Route::get('panier/empty', [App\Http\Controllers\PanierController::class, 'empty'])->name('panier.empty');
 
 
 

@@ -19,7 +19,7 @@ class PanierController extends Controller
 
     # Affichage du panier
     public function show () {
-    	return view("panier.show"); // resources\views\panier\show.blade.php
+    	return view("front.panier.show");
     }
 
     # Ajout d'un produit au panier
@@ -57,5 +57,6 @@ class PanierController extends Controller
     	return back()->withMessage("Panier vidé");
 
     }
+
 
 }

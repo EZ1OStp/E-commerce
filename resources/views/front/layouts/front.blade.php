@@ -1,32 +1,21 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @yield('content')
-</body>
-</html> --}}
-
-
-
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>{{ config('app.name', 'Laravel').' | '.'Client' }}</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
 
 
 
     <!-- Bootstrap core CSS -->
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 
     <style>
       .bd-placeholder-img {
@@ -45,37 +34,63 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css/cover.css') }}" rel="stylesheet">
   </head>
-  <body class="d-flex h-100 text-center text-white bg-dark">
+  <body>
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0">Cover</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Contact</a>
-      </nav>
+<header>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <strong>Album</strong>
+      </a>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <input type="submit" name="" id="" value='{{ __('Logout') }}'>
+        </form>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="px-3">
-    <h1>Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
-    </p>
-  </main>
+<main>
 
-  <footer class="mt-auto text-white-50">
-    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-  </footer>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">{{ config('app.name') }}</h1>
+        <p class="lead text-muted">Ceci est une appli de test d'un site e-commerce. Le front a été fait à la l'arrache.
+            Je ferais bien une demo de mes thèmes css comme les 3D cards.
+        </p>
+        <p>
+          <a href="{{ route('panier.show') }}" class="btn btn-secondary my-2">Voir le panier</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @yield('content')
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted py-5">
+  <div class="container">
+
+
 </div>
+</footer>
 
 
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
   </body>
 </html>

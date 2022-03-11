@@ -2,22 +2,35 @@
 
 @section('content')
     @forelse ($produits as $produit)
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ $produit->title }}</h5>
-          <p class="card-text">{{ $produit->description }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
 
-          <form method="POST" action="{{ route('panier.add', $produit) }}" class="form-inline d-inline-block" >
-            @csrf
-            <input type="number" name="quantity" placeholder="Quantité ?" class="form-control mr-2" >
-            <button type="submit" class="btn btn-warning" >+ Ajouter au panier</button>
-        </form>
 
+      <div class="col">
+        <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ $produit->title }}</text></svg>
+
+          <div class="card-body">
+            <p class="card-text">{{ $produit->description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=""></a></button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+              </div>
+              <small class="text-muted">{{ $produit->price.'€' }}</small>
+            </div>
+            <form method="POST" action="{{ route('panier.add', $produit) }}" class="" >
+                @csrf
+                <input type="number" name="quantity" inputmode='numeric' value="1" placeholder="Quantité ?" class="" >
+                <button type="submit" class="w-100 btn btn-light " >+ Ajouter au panier</button>
+            </form>
+          </div>
         </div>
       </div>
+
     @empty
+
+    Aucun produit pour le moment
 
     @endforelse
 @endsection
