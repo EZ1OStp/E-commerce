@@ -18,10 +18,21 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
+
+
+
     public function create()
     {
         return view('auth.register');
     }
+
 
     /**
      * Handle an incoming registration request.
@@ -51,6 +62,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        if (Auth::user()->is_admin == true) {
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->route('public.produits.index');
+        }
+
     }
 }

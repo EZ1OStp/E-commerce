@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProduitController;
@@ -15,20 +16,37 @@ use App\Http\Controllers\ProduitController;
 |
 */
 
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['admin'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['admin'])->group(function() {
-    Route::resource('user', UserController::class);
-    Route::resource('produit', ProduitController::class);
+
+
+Route::resource('user', UserController::class);
+Route::resource('produit', ProduitController::class);
+
+Route::middleware(['auth','admin'])->group(function() {
+
 });
 
-Route::get('/public/produits', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits');
+
+Route::group(['middleware' => ['auth','front']],function() {
+
+
+});
+
+
+Route::get('/public/produits', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits.index');
 Route::get('/public/produits/{produit}', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits.show');
 
 // Les routes de gestion du panier
@@ -36,6 +54,9 @@ Route::get('panier', "PanierController@show")->name('panier.show');
 Route::post('panier/add/{produit}', "PanierController@add")->name('panier.add');
 Route::get('panier/remove/{produit}', "PanierController@remove")->name('panier.remove');
 Route::get('panier/empty', "PanierController@empty")->name('panier.empty');
+
+
+
 
 
 require __DIR__.'/auth.php';

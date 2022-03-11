@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class front
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->is_admin != 1) {
-            return redirect()->route('login');
+        if (Auth::user()->is_admin == 0) {
+            return redirect()->route('public.produits.index');
         }
         return $next($request);
-
     }
 }
