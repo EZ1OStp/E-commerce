@@ -58,8 +58,8 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">{{ config('app.name') }}</h1>
-        <p class="lead text-muted">Ceci est une appli de test d'un site e-commerce. Le front a été fait à la l'arrache.
-            Je ferais bien une demo de mes thèmes css comme les 3D cards.
+        <p class="lead text-muted">Ceci est une appli de test d'un site e-commerce.
+        
         </p>
         <p>
           <a href="{{ route('panier.show') }}" class="btn btn-secondary my-2">Voir le panier</a>
