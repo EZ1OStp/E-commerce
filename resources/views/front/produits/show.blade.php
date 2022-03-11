@@ -9,7 +9,7 @@
 			<div class="mb-3" >{!! nl2br($product->description) !!}</div>
 			<div class="bg-white mt-3 p-3 border text-center" >
 				<p>Commander <strong>{{ $product->title }}</strong></p>
-				<form method="POST" action="{{ route('basket.add', $product) }}" class="form-inline d-inline-block" >
+				<form method="POST" action="{{ route('panier.add', $product) }}" class="form-inline d-inline-block" >
 					@csrf
 					<input type="number" name="quantity" placeholder="Quantité ?" class="form-control mr-2" >
 					<button type="submit" class="btn btn-warning" >+ Ajouter au panier</button>

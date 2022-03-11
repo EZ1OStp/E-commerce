@@ -47,9 +47,15 @@
                     </a>
                 @endif
 
+
+                <button class="btn btn-default ml-3 px-4 py-2">
+                    <a href="{{ route('register') }}">Register</a>
+                </button>
+
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
+
             </div>
         </form>
     </x-auth-card>

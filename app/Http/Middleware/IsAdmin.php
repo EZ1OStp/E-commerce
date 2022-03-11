@@ -17,7 +17,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->statut_admin == 1) {
+        if (Auth::user()->is_admin != 1) {
+            return redirect()->route('public.produits');
+        } else {
             return $next($request);
         }
     }

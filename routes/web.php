@@ -21,17 +21,20 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['admin'])->name('dashboard');
 
 Route::middleware(['admin'])->group(function() {
     Route::resource('user', UserController::class);
     Route::resource('produit', ProduitController::class);
 });
 
+Route::get('/public/produits', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits');
+Route::get('/public/produits/{produit}', [App\Http\Controllers\front\ProduitController::class, 'index'])->name('public.produits.show');
+
 // Les routes de gestion du panier
 Route::get('panier', "PanierController@show")->name('panier.show');
-Route::post('panier/add/{product}', "PanierController@add")->name('panier.add');
-Route::get('panier/remove/{product}', "PanierController@remove")->name('panier.remove');
+Route::post('panier/add/{produit}', "PanierController@add")->name('panier.add');
+Route::get('panier/remove/{produit}', "PanierController@remove")->name('panier.remove');
 Route::get('panier/empty', "PanierController@empty")->name('panier.empty');
 
 
