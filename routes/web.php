@@ -26,4 +26,13 @@ Route::get('/dashboard', function () {
 Route::resource('user', UserController::class);
 Route::resource('produit', ProduitController::class);
 
+
+
+// Les routes de gestion du panier
+Route::get('panier', "PanierController@show")->name('panier.show');
+Route::post('panier/add/{product}', "PanierController@add")->name('panier.add');
+Route::get('panier/remove/{product}', "PanierController@remove")->name('panier.remove');
+Route::get('panier/empty', "PanierController@empty")->name('panier.empty');
+
+
 require __DIR__.'/auth.php';
