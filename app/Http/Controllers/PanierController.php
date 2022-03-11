@@ -2,84 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Panier;
+use App\Models\Produit;
+
 use Illuminate\Http\Request;
+
+use App\Http\Repositories\PanierInterfaceRepository;
 
 class PanierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+
+	protected $panierRepository; // L'instance PanierSessionRepository
+
+    public function __construct (PanierInterfaceRepository $panierRepository) {
+    	$this->panierRepository = $panierRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    # Affichage du panier
+    public function show () {
+    	return view("panier.show"); // resources\views\panier\show.blade.php
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    # Ajout d'un produit au panier
+    public function add (Produit $produit, Request $request) {
+
+    	// Validation de la requête
+    	$this->validate($request, [
+    		"quantity" => "numeric|min:1"
+    	]);
+
+    	// Ajout/Mise à jour du produit au panier avec sa quantité
+    	$this->panierRepository->add($produit, $request->quantity);
+
+    	// Redirection vers le panier avec un message
+    	return redirect()->route("panier.show")->withMessage("Produit ajouté au panier");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Panier  $panier
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Panier $panier)
-    {
-        //
+    // Suppression d'un produit du panier
+    public function remove (Produit $produit) {
+
+    	// Suppression du produit du panier par son identifiant
+    	$this->panierRepository->remove($produit);
+
+    	// Redirection vers le panier
+    	return back()->withMessage("Produit retiré du panier");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Panier  $panier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Panier $panier)
-    {
-        //
+    // Vider la panier
+    public function empty () {
+
+    	// Suppression des informations du panier en session
+    	$this->panierRepository->empty();
+
+    	// Redirection vers le panier
+    	return back()->withMessage("Panier vidé");
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Panier  $panier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Panier $panier)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Panier  $panier
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Panier $panier)
-    {
-        //
-    }
 }

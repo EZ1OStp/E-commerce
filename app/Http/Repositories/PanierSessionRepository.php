@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Http\Repositories;
 use App\Models\Produit;
 
-class BasketSessionRepository implements PanierInterfaceRepository  {
+class PanierSessionRepository implements PanierInterfaceRepository  {
 
 	# Afficher le panier
 	public function show () {

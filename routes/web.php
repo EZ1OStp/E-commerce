@@ -23,10 +23,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('user', UserController::class);
-Route::resource('produit', ProduitController::class);
-
-
+Route::middleware(['admin'])->group(function() {
+    Route::resource('user', UserController::class);
+    Route::resource('produit', ProduitController::class);
+});
 
 // Les routes de gestion du panier
 Route::get('panier', "PanierController@show")->name('panier.show');

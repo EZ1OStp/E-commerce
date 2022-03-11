@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // provider de panier
+        App\Providers\PanierServiceProvider::class,
+
     ],
 
     /*
