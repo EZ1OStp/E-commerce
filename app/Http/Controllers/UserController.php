@@ -60,7 +60,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Enregistrement effectuer');
 
-        return redirect()->route('dashboard');
+        return redirect()->route('user.index');
     }
 
     /**

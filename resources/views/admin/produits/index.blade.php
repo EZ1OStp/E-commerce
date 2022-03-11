@@ -30,7 +30,7 @@
                         <th>#</th>
                         <th>Photo</th>
                         <th>Titre</th>
-                        <th>Quantité</th>
+                        <th>Quantité en stock</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -38,9 +38,9 @@
                     @forelse($produits as $produit)
                     <tr>
                         <td>{{ $produit->id }}</td>
-                        <td><img src="{{$produit->image !== null ? Storage::url($produit->image->path) : asset('images\1646861362.png')}}" alt="image non chargé" height="80px" width="80px"></td>
-                        <td class="mx-auto">{{ $produit->name }}</td>
-                        <td>{{ $produit->email }}</td>
+                        <td><img src="images/{{ $produit->image }}" alt="image non chargé" height="40px" width="40px"></td>
+                        <td class="mx-auto">{{ $produit->title }}</td>
+                        <td>{{ $produit->quantite }}</td>
                         <td>
                             <form action="{{ route('produit.destroy',$produit->id) }}" method="post">
                                 @csrf

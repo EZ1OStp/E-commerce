@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $('#tabUser').DataTable({
+    $('#tabProduit').DataTable({
         language: {
             url: "DataTables/media/French.json"
         },
         responsive: true,
         colReorder: true,
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [0, 1, 2, 3] }
+            { 'bSortable': false, 'aTargets': [1, 3, 4] }
         ]
 
 

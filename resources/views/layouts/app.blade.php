@@ -37,7 +37,7 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+
 
                 @yield('content')
 
@@ -73,6 +73,9 @@
                 {{ session()->get('danger') }}
             </div>
             @endif
+
+
+            {{ $slot }}
 
             </main>
         </div>

@@ -41,12 +41,14 @@ class ProduitController extends Controller
         $request->validate([
             'title' => 'required|min:3',
             'description' => 'required',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'quantite' => ['required', 'numeric']
         ]);
 
         $data['title'] = $request->title;
         $data['description'] = $request->description;
         $data['price'] = $request->price;
+        $data['quantite'] = $request->quantite;
 
 
 
@@ -57,9 +59,9 @@ class ProduitController extends Controller
             $data['image'] = $fileImageName;
         }
 
-        // dd($data);
 
-        produit::create($data);
+
+        Produit::create($data);
 
 
 
@@ -92,7 +94,7 @@ class ProduitController extends Controller
     public function edit($id)
     {
         $produit = produit::find($id);
-        return view('admin.produits.edit', compact('produit'));
+        return view('admin.produits.update', compact('produit'));
     }
 
     /**
@@ -104,13 +106,23 @@ class ProduitController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if (isset($request->description)){
+            $data['description'] = Produit::find($id)->description  ;
+        }
+
         $request->validate([
-            'title' => 'required |min:3',
-            'description' => 'required'
+            'title' => 'required|min:3',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'quantite' => ['required', 'numeric']
         ]);
 
         $data['title'] = $request->title;
         $data['description'] = $request->description;
+        $data['price'] = $request->price;
+        $data['quantite'] = $request->quantite;
+
 
 
         if ($image = $request->file('image')) {
@@ -123,7 +135,7 @@ class ProduitController extends Controller
         $produit = produit::find($id);
         $produit->update($data);
 
-        return redirect()->route('produits.index')->with('info', 'Modification a été réalise avec succès');
+        return redirect()->route('produit.index')->with('info', 'Modification a été réalise avec succès');
     }
 
     /**
@@ -138,6 +150,6 @@ class ProduitController extends Controller
 
         $produit->delete();
 
-        return redirect()->route('produits.index')->with('success', 'Suppression efféctuer');
+        return redirect()->route('produit.index')->with('success', 'Suppression efféctuer - produit'.' '.$produit->title.' id '.$produit->id  );
     }
 }
